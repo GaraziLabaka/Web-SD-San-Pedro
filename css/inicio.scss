@@ -7,7 +7,9 @@ body {
 }
 
 .navbar.barra-navegacion {
-
+display: flex;
+justify-content: flex-start; 
+    gap: 15px; 
     .logo-navbar {
         height: 60px;
         width: 60px;
@@ -26,6 +28,7 @@ body {
         margin-right: 20px;
         font-size: 18px;
         font-family: 'Ubuntu', sans-serif;
+        gap: 10px;
 
         &:hover {
             border-bottom: solid 2px $azul-enfasis;

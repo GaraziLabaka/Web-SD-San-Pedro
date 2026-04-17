@@ -1,0 +1,27 @@
+@import "colores";
+@import "../node_modules/scss/bootstrap.scss";
+@import "../css/fuentes.css";
+
+.contenido-admin {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+    align-items: center;
+
+
+
+.btn.boton-admin {
+    background: linear-gradient(to right, $azul-enfasis, $rojo-enfasis);
+    color: $texto-enlaces-botones;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer; 
+    
+    &:hover {
+        background: linear-gradient(to right, $rojo-enfasis, $azul-enfasis);
+        color: $texto-enlaces-botones;
+        }
+    }
+}

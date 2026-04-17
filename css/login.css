@@ -5,6 +5,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+@import "../css/fuentes.css";
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -9758,128 +9759,22 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.navbar.barra-navegacion {
-  display: flex;
-  justify-content: flex-start;
-  gap: 15px;
-}
-.navbar.barra-navegacion .logo-navbar {
-  height: 60px;
-  width: 60px;
-  margin-right: 50px;
-  margin: 40px;
-}
-.navbar.barra-navegacion .logo-navbar:hover {
-  transform: scale(1.2);
-}
-.navbar.barra-navegacion .nav-link {
-  color: #000000;
-  text-decoration: none;
-  margin-right: 20px;
-  font-size: 18px;
-  font-family: "Ubuntu", sans-serif;
-  gap: 10px;
-}
-.navbar.barra-navegacion .nav-link:hover {
-  border-bottom: solid 2px #1E417C;
-  color: #861618;
-}
-
-.dropdown-toggle.boton-desplegable {
-  background-color: transparent;
-  border: none;
-  color: #000000;
-  font-size: 18px;
-  font-family: "Ubuntu", sans-serif;
-}
-.dropdown-toggle.boton-desplegable:hover {
-  background-color: transparent;
-  border-bottom: solid 2px #1E417C;
-  color: #861618;
-}
-.dropdown-toggle.boton-desplegable.show, .dropdown-toggle.boton-desplegable:hover, .dropdown-toggle.boton-desplegable:focus {
-  outline: none;
-  background-color: transparent !important;
-  border-bottom: solid 2px #1E417C;
-  color: #861618 !important;
-  box-shadow: none !important;
-}
-
-.dropdown-menu .dropdown-item {
-  color: #000000;
-  font-size: 18px;
-}
-.dropdown-menu .dropdown-item:hover {
-  background: linear-gradient(to right, #1E417C, #861618);
-  color: #FFFFFF;
-}
-
-.contenido-inicio {
-  margin-top: 50px;
-  margin-bottom: 100px;
+.contenido-admin {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-.contenido-inicio .display-3.texto-titulos {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 400;
-}
-.contenido-inicio .logo-principal {
-  margin-top: 50px;
-  max-width: 200px;
-  margin-bottom: 20px;
-}
-.contenido-inicio:active {
-  background-color: none;
-  outline: none;
-}
-.contenido-inicio:active:hover {
-  background-color: none;
-  outline: none;
-}
-.contenido-inicio .dropdown-menu {
-  background-color: #1E417C;
-}
-.contenido-inicio .dropdown-menu .dropdown-item {
-  color: #000000;
-  font-size: 18px;
-}
-.contenido-inicio .dropdown-menu .dropdown-item:hover {
-  background-color: #6e93d4;
-  color: #FFFFFF;
-}
-
-.contenedor-footer {
-  display: flex;
-  padding: 0px;
   justify-content: center;
-}
-.contenedor-footer .footer {
-  display: flex;
-  background: linear-gradient(to right, #1E417C, #861618);
-  justify-content: space-around;
   align-items: center;
-  color: #FFFFFF;
-  position: fixed;
-  flex-wrap: wrap;
-  bottom: 0px;
-  width: 100%;
-  padding: 2%;
 }
-.contenedor-footer p {
-  margin-top: 20px;
+.contenido-admin .btn.boton-admin {
+  background: linear-gradient(to right, #1E417C, #861618);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
   font-size: 18px;
+  font-family: "Ubuntu", sans-serif;
+  cursor: pointer;
 }
-.contenedor-footer .footer > a {
+.contenido-admin .btn.boton-admin:hover {
+  background: linear-gradient(to right, #861618, #1E417C);
   color: #FFFFFF;
-  font-size: 24px;
-}
-.contenedor-footer .footer > a:hover {
-  color: #d8bf30;
-}/*# sourceMappingURL=inicio.css.map */
+}/*# sourceMappingURL=login.css.map */
