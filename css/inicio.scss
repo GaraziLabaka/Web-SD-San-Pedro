@@ -6,16 +6,17 @@ body {
     padding:0;
 }
 
-.navbar {
-    display: flex;
+.navbar.barra-navegacion {
 
     .logo-navbar {
-        height: 50px;
-        width: 50px;
-        margin-right: 20px;
+        height: 60px;
+        width: 60px;
+        margin-right: 50px;
+        margin: 40px;
 
         &:hover {
             transform: scale(1.2);
+
         }
     }
 
@@ -24,29 +25,98 @@ body {
         text-decoration: none;
         margin-right: 20px;
         font-size: 18px;
+        font-family: 'Ubuntu', sans-serif;
 
         &:hover {
             border-bottom: solid 2px $azul-enfasis;
+            color: $rojo-enfasis;
         }
 
     }
 
 }
 
-.contenedor-inicio {
+.dropdown-toggle.boton-desplegable {
+    background-color: transparent;
+    border: none;
+    color: $texto-principal;
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+
+    &:hover {
+        background-color: transparent;
+        border-bottom: solid 2px $azul-enfasis;
+        color: $rojo-enfasis;
+}
+
+&.show, &:hover , &:focus {
+        outline: none;
+        background-color: transparent !important;
+        border-bottom: solid 2px $azul-enfasis;
+        color: $rojo-enfasis !important;
+        box-shadow: none !important;
+    }
+}
+
+.dropdown-menu {
+    .dropdown-item {
+        color: $texto-principal;
+        font-size: 18px;
+        
+
+        &:hover {
+            background: linear-gradient(to right, $azul-enfasis, $rojo-enfasis);
+            color: $texto-enlaces-botones;
+        }
+    }
+}
+
+.contenido-inicio {
     margin-top: 50px;
     margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    .display-3.texto-titulos {
+        font-family: "Ubuntu", sans-serif;
+        font-weight: 400;
+    }
+
     .logo-principal {
+        margin-top: 50px;
         max-width: 200px;
         margin-bottom: 20px;
     }
+
+    &:active {
+        background-color: none;
+        outline: none;
+
+        &:hover {
+            background-color: none;
+            outline: none;
+        }
+
+    
+
 }
 
+.dropdown-menu {
+    background-color: $azul-enfasis;
 
+    .dropdown-item {
+        color: $texto-principal;
+        font-size: 18px;
+
+        &:hover {
+            background-color: $azul-claro;
+            color: $texto-enlaces-botones;
+        }
+    }
+}
+
+}
 .contenedor-footer {
     display: flex;
     padding: 0px;
@@ -67,6 +137,7 @@ body {
 
     p {
         margin-top: 20px;
+        font-size: 18px;
     }
 
     .footer > a{
