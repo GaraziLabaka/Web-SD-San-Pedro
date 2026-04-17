@@ -1,0 +1,80 @@
+@import "colores";
+@import "../node_modules/scss/bootstrap.scss";
+
+body {
+    margin:0;
+    padding:0;
+}
+
+.navbar {
+    display: flex;
+
+    .logo-navbar {
+        height: 50px;
+        width: 50px;
+        margin-right: 20px;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    .nav-link {
+        color: $texto-principal;
+        text-decoration: none;
+        margin-right: 20px;
+        font-size: 18px;
+
+        &:hover {
+            border-bottom: solid 2px $azul-enfasis;
+        }
+
+    }
+
+}
+
+.contenedor-inicio {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .logo-principal {
+        max-width: 200px;
+        margin-bottom: 20px;
+    }
+}
+
+
+.contenedor-footer {
+    display: flex;
+    padding: 0px;
+    justify-content: center;
+
+    .footer {
+        display: flex;
+        background: linear-gradient(to right, $azul-enfasis, $rojo-enfasis);
+        justify-content: space-around;
+        align-items: center;
+        color: $texto-enlaces-botones;
+        position: fixed;
+        flex-wrap: wrap;
+        bottom: 0px;
+        width: 100%;
+        padding: 2%;
+    }
+
+    p {
+        margin-top: 20px;
+    }
+
+    .footer > a{
+            color: $texto-enlaces-botones;
+            font-size: 24px;
+
+            &:hover {
+                color: $dorado;
+            }
+        }
+    }
