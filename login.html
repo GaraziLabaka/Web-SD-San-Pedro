@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/login.css">
     <script src="https://kit.fontawesome.com/fcc57e11ec.js" crossorigin="anonymous"></script>
 
-    <script src="../js/login.js"></script>
+    <script src="javascript/login.js" type="module"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,7 @@
 
     <!-- Formulario para autenticarse como administrador -->
     <div class="contenido-admin">
-        <form class="form-horizontal" action="admin.html" onsubmit=autenticarAdmin() method="post">
+        <form class="form-horizontal">
   <div class="form-group">
     <div class="col-sm-10">
       <input type="text" class="form-control" id="usuario" placeholder="Introduce tu nombre de usuario" size="46" maxlength="50">
@@ -63,7 +63,7 @@
   <br>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default boton-admin" aria-setsize="50">Acceder a la zona de administración</button>
+      <button type="button" class="btn btn-default boton-admin" aria-setsize="50">Acceder a la zona de administración</button>
     </div>
   </div>
 </form>
@@ -85,3 +85,5 @@
             <a href="https://www.instagram.com/sdsanpedro/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
         </div>
     </div>
+</body>
+
