@@ -2,11 +2,14 @@
 @import "../node_modules/scss/bootstrap.scss";
 @import "../css/fuentes.css";
 
-.contenido-admin {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
+   .contenido-admin {
+    flex: 1 0 auto; 
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center; 
+    padding: 50px 0;
+}
 
 
 
@@ -24,4 +27,3 @@
         color: $texto-enlaces-botones;
         }
     }
-}

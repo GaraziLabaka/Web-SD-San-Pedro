@@ -9760,12 +9760,15 @@ textarea.form-control-lg {
   }
 }
 .contenido-admin {
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 50px 0;
 }
-.contenido-admin .btn.boton-admin {
+
+.btn.boton-admin {
   background: linear-gradient(to right, #1E417C, #861618);
   color: #FFFFFF;
   border: none;
@@ -9774,7 +9777,7 @@ textarea.form-control-lg {
   font-family: "Ubuntu", sans-serif;
   cursor: pointer;
 }
-.contenido-admin .btn.boton-admin:hover {
+.btn.boton-admin:hover {
   background: linear-gradient(to right, #861618, #1E417C);
   color: #FFFFFF;
 }/*# sourceMappingURL=login.css.map */

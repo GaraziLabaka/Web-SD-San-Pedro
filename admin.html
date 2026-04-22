@@ -9,8 +9,11 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/inicio.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/admin.css">
     <script src="https://kit.fontawesome.com/fcc57e11ec.js" crossorigin="anonymous"></script>
+    …
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +25,7 @@
     <title>SD San Pedro - Zona de administración</title>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <nav>
         <!-- Barra de navegación -->
         <div class="navbar barra-navegacion">
@@ -44,10 +47,23 @@
         </div>
     </nav>
 
-    <h3 class="display-3 texto-titulos">Zona de administración</h3>
-    <p class="texto-admin">Aquí se puede gestionar el contenido del sitio web.</p>
+    <div class="mb-3 contenido-zona-admin">
+        <input type="text" class="form-control" id="titulo-noticia" placeholder="Título de la noticia">
+        <br>
+        <div class="mb-3">
+            <input id="contenido-noticia" type="hidden" name="content">
+            <trix-editor input="contenido-noticia" placeholder="Contenido de la noticia"></trix-editor>
+        </div>
+        <div class="mb-3">
+            <div class="btn btn-primary boton" type="submit">Publicar noticia</div>
+        </div>
+
+
 
     </div>
+
+    </div>
+
 
 
 

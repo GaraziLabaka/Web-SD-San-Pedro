@@ -9761,6 +9761,15 @@ textarea.form-control-lg {
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+html {
+  height: 100%;
+  margin: 0;
 }
 
 .navbar.barra-navegacion {
@@ -9821,7 +9830,7 @@ body {
 
 .contenido-inicio {
   margin-top: 50px;
-  margin-bottom: 100px;
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9855,31 +9864,32 @@ body {
   color: #FFFFFF;
 }
 
-.contenedor-footer {
-  display: flex;
-  padding: 0px;
+.contenedor-footer.container-fluid, .contenedor-footer.container-sm, .contenedor-footer.container-md, .contenedor-footer.container-lg, .contenedor-footer.container-xl, .contenedor-footer.container-xxl {
+  width: 100% !important;
+  padding: 0px !important;
+  margin: 0px !important;
   justify-content: center;
 }
-.contenedor-footer .footer {
+.contenedor-footer.container-fluid .footer, .contenedor-footer.container-sm .footer, .contenedor-footer.container-md .footer, .contenedor-footer.container-lg .footer, .contenedor-footer.container-xl .footer, .contenedor-footer.container-xxl .footer {
   display: flex;
   background: linear-gradient(to right, #1E417C, #861618);
   justify-content: space-around;
   align-items: center;
   color: #FFFFFF;
-  position: fixed;
   flex-wrap: wrap;
+  position: relative;
   bottom: 0px;
   width: 100%;
   padding: 2%;
 }
-.contenedor-footer p {
+.contenedor-footer.container-fluid p, .contenedor-footer.container-sm p, .contenedor-footer.container-md p, .contenedor-footer.container-lg p, .contenedor-footer.container-xl p, .contenedor-footer.container-xxl p {
   margin-top: 20px;
   font-size: 18px;
 }
-.contenedor-footer .footer > a {
+.contenedor-footer.container-fluid .footer > a, .contenedor-footer.container-sm .footer > a, .contenedor-footer.container-md .footer > a, .contenedor-footer.container-lg .footer > a, .contenedor-footer.container-xl .footer > a, .contenedor-footer.container-xxl .footer > a {
   color: #FFFFFF;
   font-size: 24px;
 }
-.contenedor-footer .footer > a:hover {
+.contenedor-footer.container-fluid .footer > a:hover, .contenedor-footer.container-sm .footer > a:hover, .contenedor-footer.container-md .footer > a:hover, .contenedor-footer.container-lg .footer > a:hover, .contenedor-footer.container-xl .footer > a:hover, .contenedor-footer.container-xxl .footer > a:hover {
   color: #d8bf30;
 }/*# sourceMappingURL=inicio.css.map */
