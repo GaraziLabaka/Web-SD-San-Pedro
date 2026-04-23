@@ -21,7 +21,11 @@
         href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
         rel="stylesheet">
 
+        <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
 
+        <script src="./javascript/tabla-noticias.js"></script>
+        
     <title>SD San Pedro - Zona de administración</title>
 </head>
 
@@ -48,24 +52,21 @@
     </nav>
 
     <div class="mb-3 contenido-zona-admin">
-        <input type="text" class="form-control" id="titulo-noticia" placeholder="Título de la noticia">
-        <br>
-        <div class="mb-3">
-            <input id="contenido-noticia" type="hidden" name="content">
-            <trix-editor input="contenido-noticia" placeholder="Contenido de la noticia"></trix-editor>
+        <div ckass="editor-texto">
+            <input type="text" class="form-control" id="titulo-noticia" placeholder="Título de la noticia">
+            <br>
+            <div class="mb-3">
+                <input id="contenido-noticia" type="hidden" name="content">
+                <trix-editor input="contenido-noticia" placeholder="Contenido de la noticia"></trix-editor>
+            </div>
+            <div class="mb-3">
+                <div class="btn btn-primary boton" type="submit">Publicar noticia</div>
+            </div>
         </div>
-        <div class="mb-3">
-            <div class="btn btn-primary boton" type="submit">Publicar noticia</div>
-        </div>
-
-
-
+            <div id="wrapper"></div> 
+            
+       </div>    
     </div>
-
-    </div>
-
-
-
 
     <!-- Pie de página -->
     <div class="contenedor-footer container-fluid">

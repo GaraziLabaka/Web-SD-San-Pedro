@@ -2,5 +2,6 @@
   margin: 20px;
   padding: 20px;
   display: grid;
-  grid-column: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }/*# sourceMappingURL=admin.css.map */
