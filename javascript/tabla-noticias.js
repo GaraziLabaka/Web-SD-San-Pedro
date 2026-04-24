@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function editarNoticia(titulo) {
-    alert("Editando: " + titulo);
+    
 }
 
 function borrarNoticia(titulo) {

@@ -55,12 +55,14 @@
         <div ckass="editor-texto">
             <input type="text" class="form-control" id="titulo-noticia" placeholder="Título de la noticia">
             <br>
+            <input type="date" class="form-control" id="fecha-noticia" placeholder="Fecha de la noticia">
+            <br>
             <div class="mb-3">
                 <input id="contenido-noticia" type="hidden" name="content">
                 <trix-editor input="contenido-noticia" placeholder="Contenido de la noticia"></trix-editor>
             </div>
             <div class="mb-3">
-                <div class="btn btn-primary boton" type="submit">Publicar noticia</div>
+                <div class="btn btn-primary boton" id="publicar-noticia" type="submit">Publicar noticia</div>
             </div>
         </div>
             <div id="wrapper"></div> 
