@@ -1,24 +1,31 @@
+// javascript/login.js
 document.addEventListener("DOMContentLoaded", () => {
     const boton = document.querySelector(".boton-admin");
 
     boton.addEventListener("click", async () => {
-        const userVal = document.getElementById("usuario").value;
-        const passVal = document.getElementById("password").value;
+        const email = document.getElementById("usuario").value;
+        const password = document.getElementById("password").value;
+
+        if (!window.supabaseClient) {
+            alert("Error: No se pudo conectar con el servidor de seguridad.");
+            return;
+        }
 
         try {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: userVal, 
-                password: passVal,
+            const { data, error } = await window.supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password,
             });
 
             if (error) {
-                alert("Acceso denegado: " + error.message);
+                alert("Error de acceso: " + error.message);
             } else {
-                window.location.href = "admin.html";
+                console.log("Sesión iniciada con éxito");
+                window.location.href = "admin.html"; 
             }
-
-        } catch (error) {
-            alert("Error crítico de conexión.");
+        } catch (err) {
+            console.error(err);
+            alert("Error crítico al intentar conectar.");
         }
     });
 });
