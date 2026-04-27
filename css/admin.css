@@ -4,4 +4,20 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+.contenido-zona-admin .wrapper, .contenido-zona-admin .btn.boton-editar.btn-sm {
+  background: #1E417C;
+  color: #FFFFFF;
+  border: none;
+}
+.contenido-zona-admin .wrapper:hover, .contenido-zona-admin .btn.boton-editar.btn-sm:hover {
+  background: #6e93d4;
+}
+.contenido-zona-admin .wrapper, .contenido-zona-admin .btn.boton-borrar.btn-sm {
+  background: #861618;
+  color: #FFFFFF;
+  border: none;
+}
+.contenido-zona-admin .wrapper:hover, .contenido-zona-admin .btn.boton-borrar.btn-sm:hover {
+  background: #fcc2c7;
 }/*# sourceMappingURL=admin.css.map */

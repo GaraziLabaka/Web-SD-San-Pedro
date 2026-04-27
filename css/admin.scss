@@ -1,3 +1,5 @@
+@import "colores";
+
 .contenido-zona-admin {
     margin: 20px;
     padding: 20px;
@@ -5,7 +7,25 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 
-    .editor-texto {
+    .wrapper, .btn.boton-editar.btn-sm {
+            background: $azul-enfasis;
+            color: $texto-enlaces-botones;
+            border: none;
+
+            &:hover {
+                background: $azul-claro;
+            }
+        }
         
+
+        .wrapper, .btn.boton-borrar.btn-sm {
+            background: $rojo-enfasis;
+            color: $texto-enlaces-botones;
+            border: none;
+
+            &:hover {
+                background: $rojo-claro;
+            }
+        }
     }
-}
+
