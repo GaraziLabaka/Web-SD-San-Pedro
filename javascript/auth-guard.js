@@ -1,7 +1,8 @@
-// javascript/auth-guard.js
+async function verificarAcceso() {
+    console.log("Verificando sesión...");
 
-async function checkAccess() {
     if (!window.supabaseClient) {
+        console.error("Supabase no está configurado.");
         window.location.href = "login.html";
         return;
     }
@@ -9,12 +10,20 @@ async function checkAccess() {
     const { data: { session }, error } = await window.supabaseClient.auth.getSession();
 
     if (error || !session) {
-        document.body.style.display = "none";
+        console.warn("Acceso denegado. Redirigiendo al login...");
         window.location.href = "login.html";
     } else {
-        document.body.style.display = "block";
-        console.log("Bienvenido, administrador:", session.user.email);
+        console.log("Acceso concedido para:", session.user.email);
+        
+        
+        if (document.body) {
+            document.body.style.display = "block";
+        } else {
+            document.addEventListener("DOMContentLoaded", () => {
+                document.body.style.display = "block";
+            });
+        }
     }
 }
 
-checkAccess();
+verificarAcceso();
