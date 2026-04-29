@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const wrapper = document.getElementById("wrapper");
+    const boton = document.getElementById("publicar-noticia");
     if (!wrapper) return;
 
 
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     const datosFormateados = data.map(n => [
+        n.id,
         typeof n.imagen === 'object' ? 'Sin imagen' : (n.imagen || ''),
         n.titulo || 'Sin título',
         n.fecha || '',
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     new gridjs.Grid({
         columns: [
+            { name: "ID", hidden: true },
             {
                 name: "Imagen",
                 formatter: (cell) => {
@@ -57,9 +60,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                 name: 'Acciones',
                 formatter: (cell, row) => {
                     const id = row.cells[0].data;
+                    const titulo = row ? row.cells[1]?.data || "Sin-Titulo" : "Sin-Titulo";
                     return gridjs.html(`
                         <div class="d-flex gap-2">
-                            <button class="btn boton-editar btn-sm" onclick="editarNoticia('${titulo}')">
+                            <button class="btn boton-editar btn-sm" data-bs-toggle="modal" data-bs-target="#modal" onclick="editarNoticia('${id}')">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                             <button class="btn boton-borrar btn-sm" onclick="borrarNoticia('${id}')">
@@ -83,67 +87,66 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // lógica para el botón de publicar
     boton.addEventListener("click", async () => {
-        const fotoInput = document.getElementById("imagen-noticia");
-        const fotoArchivo = fotoInput.files[0];
-        const titulo = document.getElementById("titulo-noticia").value;
-        const fecha = document.getElementById("fecha-noticia").value;
-        const contenido = document.getElementById("contenido-noticia").value;
+       const fotoInput = document.getElementById("imagen-noticia");
+    const fotoArchivo = fotoInput.files[0];
+    const titulo = document.getElementById("titulo-noticia").value;
+    const fecha = document.getElementById("fecha-noticia").value;
+    let contenido = document.getElementById("trix-editor-noticia").value;
+    const inputOculto = document.getElementById("trix-editor-noticia");
+    const editorCrear = document.querySelector("#trix-editor-noticia");
 
-        if (!fotoArchivo) return alert("Selecciona una imagen primero");
+    if (editorCrear && editorCrear.editor) {
+        contenido = editorCrear.editor.getHTML();
+    } else if (inputOculto) {
+        contenido = inputOculto.value;
+    }
 
-        try {
-            const nombreArchivo = `${Date.now()}_${fotoArchivo.name.replace(/\s+/g, '_')}`;
-            console.log("Subiendo archivo:", nombreArchivo);
-            const { data: uploadData, error: uploadError } = await window.supabaseClient
-                .storage
-                .from('imagenes-noticias')
-                .upload(nombreArchivo, fotoArchivo);
+    if (!fotoArchivo) return alert("Selecciona una imagen primero");
+    if (!titulo) return alert("El título es obligatorio");
 
-            if (uploadError) {
-                console.error("Error en Storage:", uploadError);
-                throw new Error("No se pudo subir la foto al Storage: " + uploadError.message);
-            }
+    try {
+        const nombreArchivo = `${Date.now()}_${fotoArchivo.name.replace(/\s+/g, '_')}`;
+        
+        // subir al Storage
+        const { error: uploadError } = await window.supabaseClient
+            .storage
+            .from('imagenes-noticias')
+            .upload(nombreArchivo, fotoArchivo);
 
-            // obtener la url de supabase
-            const { data: urlData } = window.supabaseClient
-                .storage
-                .from('imagenes-noticias')
-                .getPublicUrl(nombreArchivo);
+        if (uploadError) throw uploadError;
 
-            if (!urlData || !urlData.publicUrl) {
-                throw new Error("Supabase no devolvió una URL válida");
-            }
+        // obtener la URL pública 
+        const { data: urlData } = window.supabaseClient
+            .storage
+            .from('imagenes-noticias')
+            .getPublicUrl(nombreArchivo);
 
-            const urlFinal = urlData.publicUrl;
-            console.log("URL generada con éxito:", urlFinal);
+        const urlFinal = urlData.publicUrl;
 
-            // insertar en la tabla
-            const { error: insertError } = await window.supabaseClient
-                .from('Noticia')
-                .insert([{
-                    titulo: titulo,
-                    fecha: fecha,
-                    contenido: contenido,
-                    imagen: urlFinal
-                }]);
+        // insertar en Supabase
+        const { error: insertError } = await window.supabaseClient
+            .from('Noticia')
+            .insert([{
+                titulo: titulo,
+                fecha: fecha,
+                contenido: contenido,
+                imagen: urlFinal
+            }]);
 
-            if (insertError) throw insertError;
+        if (insertError) throw insertError;
 
-            alert("¡Publicado correctamente!");
-            alert("¡Noticia publicada con éxito!");
-            setTimeout(() => {
-                location.reload();
-            }, 500);
-            location.reload();
+        alert("¡Noticia publicada con éxito!");
+        location.reload();
 
-        } catch (err) {
-            console.error("ERROR COMPLETO:", err);
-            alert("ALERTA DE ERROR: " + err.message);
-        }
-    })
+    } catch (err) {
+        console.error("ERROR AL PUBLICAR:", err);
+        alert("Error al publicar noticia: " + err.message);
+    }
 });
 
 window.borrarNoticia = async (id) => {
+
+    if (!confirm(`¿Confirma que desea eliminar la noticia con ID "${id}"?`)) return;
 
     try {
         const { error } = await window.supabaseClient
@@ -152,10 +155,99 @@ window.borrarNoticia = async (id) => {
             .eq('id', id);
 
         if (error) throw error;
+
+        alert("Noticia eliminada con éxito");
         location.reload();
 
     } catch (err) {
-        console.error("Error al eliminar noticia:", err);
+        console.error("Error al eliminar:", err);
         alert("Error al eliminar noticia: " + err.message);
     }
 };
+
+window.editarNoticia = async (id) => {
+    try {
+        // obtener los datos de la noticia
+        const { data, error } = await window.supabaseClient
+            .from('Noticia')
+            .select('*')
+            .eq('id', id)
+            .single();
+
+        if (error) throw error;
+
+        // rellenar campos de texto y fecha
+        document.getElementById("titulo-noticia-editar").value = data.titulo;
+        document.getElementById("fecha-noticia-editar").value = data.fecha;
+
+        // Rellenar Trix Editor con el contenido de la noticia
+
+        const cargarEnTrix = () => {
+            const editorElement = document.querySelector("#trix-modal");
+            const inputOculto = document.getElementById("trix-modal");
+
+            if (inputOculto) inputOculto.value = data.contenido || "";
+
+            if (editorElement && editorElement.editor) {
+                editorElement.editor.loadHTML(data.contenido || "");
+            } else {
+                document.addEventListener("trix-initialize", () => {
+                    const el = document.querySelector("trix-editor");
+                    el.editor.loadHTML(data.contenido || "");
+                }, { once: true }); 
+            }
+        };
+
+        cargarEnTrix();
+
+        // guardar cambios
+        document.getElementById("guardar-cambios").onclick = async function () {
+            const nuevoTitulo = document.getElementById("titulo-noticia-editar").value;
+            const nuevaFecha = document.getElementById("fecha-noticia-editar").value;
+            const nuevoContenido = document.getElementById("contenido-noticia-editar").value;
+            const fotoInput = document.getElementById("imagen-noticia-editar");
+            const nuevaFotoArchivo = fotoInput.files[0];
+
+            try {
+                let datosActualizados = {
+                    titulo: nuevoTitulo,
+                    fecha: nuevaFecha,
+                    contenido: nuevoContenido
+                };
+
+                // si el usuario ha seleccionado una foto nueva se sube
+                if (nuevaFotoArchivo) {
+                    const nombreArchivo = `${Date.now()}_${nuevaFotoArchivo.name}`;
+                    const { error: storageError } = await window.supabaseClient.storage
+                        .from('imagenes-noticias')
+                        .upload(nombreArchivo, nuevaFotoArchivo);
+
+                    if (storageError) throw storageError;
+
+                    const { data: urlData } = window.supabaseClient.storage
+                        .from('imagenes-noticias')
+                        .getPublicUrl(nombreArchivo);
+
+                    datosActualizados.imagen = urlData.publicUrl;
+                }
+
+                // actualizar en Supabase
+                const { error: updateError } = await window.supabaseClient
+                    .from('Noticia')
+                    .update(datosActualizados)
+                    .eq('id', id);
+
+                if (updateError) throw updateError;
+
+                alert("Noticia actualizada con éxito");
+                location.reload();
+
+            } catch (err) {
+                alert("Error al guardar cambios: " + err.message);
+            }
+        };
+    } catch (err) {
+        console.error("Error al cargar noticia:", err);
+        alert("Error al cargar noticia: " + err.message);
+    }
+}});

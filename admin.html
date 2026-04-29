@@ -53,8 +53,6 @@
 
 
 
-
-
     <title>SD San Pedro - Zona de administración</title>
 </head>
 
@@ -89,17 +87,43 @@
             <input type="file" class="form-control" id="imagen-noticia" placeholder="Imagen de la noticia">
             <br>
             <div class="mb-3">
-                <input id="contenido-noticia" type="hidden" name="content">
-                <trix-editor input="contenido-noticia" placeholder="Contenido de la noticia"></trix-editor>
+                <input id="trix-editor-noticia" type="hidden" name="content">
+                <trix-editor id="trix-editor-noticia" input="trix-editor-noticia" placeholder="Contenido de la noticia"></trix-editor>
             </div>
             <div class="mb-3">
                 <button class="btn boton-admin" id="publicar-noticia" type="button">Publicar noticia</button>
             </div>
         </div>
         <div id="wrapper"></div>
+    </div>
 
+    <!--Formulario para editar noticia-->
+
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalLabel">Editar noticia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="titulo-noticia-editar" placeholder="Título de la noticia">
+        <br>
+        <input type="date" class="form-control" id="fecha-noticia-editar" placeholder="Fecha de la noticia">
+        <br>
+        <input type="file" class="form-control" id="imagen-noticia-editar" placeholder="Imagen de la noticia">
+        <br>
+        <div class="mb-3">
+            <input id="trix-modal" type="hidden" name="content">
+            <trix-editor id="trix-modal" input="contenido-noticia-editar" placeholder="Contenido de la noticia"></trix-editor>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn boton-admin" id="guardar-cambios">Guardar cambios</button>
+      </div>
     </div>
-    </div>
+  </div>
+</div>
 
     <!-- Pie de página -->
     <div class="contenedor-footer container-fluid">
