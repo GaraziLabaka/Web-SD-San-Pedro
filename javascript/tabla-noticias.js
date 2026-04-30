@@ -167,7 +167,7 @@ window.borrarNoticia = async (id) => {
 
 window.editarNoticia = async (id) => {
     try {
-        // obtener los datos de la noticia
+        // 1. Obtener los datos de la noticia
         const { data, error } = await window.supabaseClient
             .from('Noticia')
             .select('*')
@@ -176,37 +176,38 @@ window.editarNoticia = async (id) => {
 
         if (error) throw error;
 
-        // rellenar campos de texto y fecha
+        // 2. Rellenar campos de texto y fecha
         document.getElementById("titulo-noticia-editar").value = data.titulo;
         document.getElementById("fecha-noticia-editar").value = data.fecha;
 
-        // Rellenar Trix Editor con el contenido de la noticia
+        // 3. Rellenar Trix Editor
+        const inputOcultoModal = document.getElementById("trix-modal");
+        const editorElement = document.querySelector("trix-editor[input='trix-modal']");
 
-        const cargarEnTrix = () => {
-            const editorElement = document.querySelector("#trix-modal");
-            const inputOculto = document.getElementById("trix-modal");
+        if (inputOcultoModal) inputOcultoModal.value = data.contenido || "";
 
-            if (inputOculto) inputOculto.value = data.contenido || "";
+        if (editorElement && editorElement.editor) {
+            editorElement.editor.loadHTML(data.contenido || "");
+        } else {
+            // Si el editor no se ha inicializado (primera vez que se abre la modal)
+            document.addEventListener("trix-initialize", () => {
+                const el = document.querySelector("trix-editor[input='trix-modal']");
+                if (el && el.editor) el.editor.loadHTML(data.contenido || "");
+            }, { once: true });
+        }
 
-            if (editorElement && editorElement.editor) {
-                editorElement.editor.loadHTML(data.contenido || "");
-            } else {
-                document.addEventListener("trix-initialize", () => {
-                    const el = document.querySelector("trix-editor");
-                    el.editor.loadHTML(data.contenido || "");
-                }, { once: true }); 
-            }
-        };
-
-        cargarEnTrix();
-
-        // guardar cambios
+        // 4. Lógica para guardar cambios
         document.getElementById("guardar-cambios").onclick = async function () {
             const nuevoTitulo = document.getElementById("titulo-noticia-editar").value;
             const nuevaFecha = document.getElementById("fecha-noticia-editar").value;
-            const nuevoContenido = document.getElementById("contenido-noticia-editar").value;
+            
+            // CORRECCIÓN: Trix sincroniza el HTML con su input oculto vinculado
+            const nuevoContenido = document.getElementById("trix-modal").value;
+            
             const fotoInput = document.getElementById("imagen-noticia-editar");
             const nuevaFotoArchivo = fotoInput.files[0];
+
+            if (!nuevoTitulo) return alert("El título es obligatorio");
 
             try {
                 let datosActualizados = {
@@ -215,9 +216,9 @@ window.editarNoticia = async (id) => {
                     contenido: nuevoContenido
                 };
 
-                // si el usuario ha seleccionado una foto nueva se sube
+                // Subida de foto si existe una nueva
                 if (nuevaFotoArchivo) {
-                    const nombreArchivo = `${Date.now()}_${nuevaFotoArchivo.name}`;
+                    const nombreArchivo = `${Date.now()}_${nuevaFotoArchivo.name.replace(/\s+/g, '_')}`;
                     const { error: storageError } = await window.supabaseClient.storage
                         .from('imagenes-noticias')
                         .upload(nombreArchivo, nuevaFotoArchivo);
@@ -231,7 +232,7 @@ window.editarNoticia = async (id) => {
                     datosActualizados.imagen = urlData.publicUrl;
                 }
 
-                // actualizar en Supabase
+                // Actualizar en Supabase
                 const { error: updateError } = await window.supabaseClient
                     .from('Noticia')
                     .update(datosActualizados)
