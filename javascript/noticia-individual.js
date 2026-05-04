@@ -1,44 +1,38 @@
 async function crearNoticia() {
-    // obtener los datos de Supabase
-    const { data, error } = await window.supabaseClient
+    // extraer el ID de la URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!id) {
+        console.error("No se encontró ningún ID en la URL");
+        return;
+    }
+
+    // obtener los datos de Supabase 
+    const { data: noticia, error } = await window.supabaseClient
             .from('Noticia')
             .select('*')
             .eq('id', id)
             .single();
 
     if (error) {
-        console.error("Error al obtener noticias:", error);
+        console.error("Error al obtener la noticia:", error);
         return;
     }
 
     const contenedor = document.querySelector("#contenedor-noticia-individual");
     
-    if (data) {
-        contenedor.innerHTML = data.map(noticia => `
-            <div class="container-fluid">
+    if (noticia) {
+        contenedor.innerHTML = `
+            <div class="container-fluid d-flex flex-column">
                 <h2 class="text-start">${noticia.titulo}</h2>
-                <img class="img-fluid mb-4" src="${noticia.imagen}" alt="${noticia.titulo}" style="width: 100%; height: auto; object-fit: cover;" />
+                <img class="img-fluid mb-4" src="${noticia.imagen}" alt="${noticia.titulo}" 
+                     style="width: 25%; height: 25%; align-self: center;" />
                 <p class="text-start"><small class="text-muted">${noticia.fecha}</small></p>
-                <p class="text-justify">${noticia.contenido}</p>
+                <div class="text-justify">${noticia.contenido}</div>
             </div>
-        `).join('');
+        `;
     }
 }
 
-
-async function generarLink(id) {
-    const { data, error } = await window.supabaseClient
-        .from('Noticia')
-        .select('id')
-        .eq('id', id)
-        .single();
-
-    if (error) {
-        console.error("Error al generar el link:", error);
-        return null;
-    }
-
-    return data ? `noticias/${data.titulo}.html` : null;
-
-}   
 document.addEventListener("DOMContentLoaded", crearNoticia);

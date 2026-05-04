@@ -167,7 +167,7 @@ window.borrarNoticia = async (id) => {
 
 window.editarNoticia = async (id) => {
     try {
-        // 1. Obtener los datos de la noticia
+        // obtener los datos de la noticia
         const { data, error } = await window.supabaseClient
             .from('Noticia')
             .select('*')
@@ -176,11 +176,11 @@ window.editarNoticia = async (id) => {
 
         if (error) throw error;
 
-        // 2. Rellenar campos de texto y fecha
+        // rellenar campos de texto y fecha
         document.getElementById("titulo-noticia-editar").value = data.titulo;
         document.getElementById("fecha-noticia-editar").value = data.fecha;
 
-        // 3. Rellenar Trix Editor
+        // rellenar Trix Editor
         const inputOcultoModal = document.getElementById("trix-modal");
         const editorElement = document.querySelector("trix-editor[input='trix-modal']");
 
@@ -196,12 +196,11 @@ window.editarNoticia = async (id) => {
             }, { once: true });
         }
 
-        // 4. Lógica para guardar cambios
+        // lógica para guardar cambios
         document.getElementById("guardar-cambios").onclick = async function () {
             const nuevoTitulo = document.getElementById("titulo-noticia-editar").value;
             const nuevaFecha = document.getElementById("fecha-noticia-editar").value;
             
-            // CORRECCIÓN: Trix sincroniza el HTML con su input oculto vinculado
             const nuevoContenido = document.getElementById("trix-modal").value;
             
             const fotoInput = document.getElementById("imagen-noticia-editar");
