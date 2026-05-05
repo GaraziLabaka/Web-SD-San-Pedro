@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#contenedor-noticia-individual {
+    &, & * {
+        font-family: 'Ubuntu', sans-serif !important;
+        text-align: justify !important;
+        margin: 10px !important;
+    }
+
+    h1 {
+        text-align: center !important;
+    }
+}
+
+.contenido-estatico {
+    &, & * {
+        font-family: 'Ubuntu', sans-serif !important;
+        text-align: justify !important;
+        margin: 20px !important;
+    }
+
+   
+}
+
+.contenido-estatico-noticias-titulo {
+    &, & * {
+        font-family: 'Ubuntu', sans-serif !important;
+        text-align: center !important;
+        margin: 20px !important;
+    }
+
+   
+}

@@ -24,12 +24,12 @@ async function crearNoticia() {
     
     if (noticia) {
         contenedor.innerHTML = `
-            <div class="container-fluid d-flex flex-column">
-                <h2 class="text-start">${noticia.titulo}</h2>
+            <div class="container-fluid d-flex flex-column contenido-estatico contenido-estatico-noticias-titulo">
+                <h2 class="text-center">${noticia.titulo}</h2>
                 <img class="img-fluid mb-4" src="${noticia.imagen}" alt="${noticia.titulo}" 
                      style="width: 25%; height: 25%; align-self: center;" />
                 <p class="text-start"><small class="text-muted">${noticia.fecha}</small></p>
-                <div class="text-justify">${noticia.contenido}</div>
+                <div>${noticia.contenido}</div>
             </div>
         `;
     }

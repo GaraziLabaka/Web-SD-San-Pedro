@@ -31,7 +31,7 @@ async function obtenerYDibujarNoticias() {
                         ${noticia.contenido}
                     </div>
                 </div>
-                <button class="btn btn-primary m-3" onclick="location.href='detalle-noticia.html?id=${noticia.id}'">
+                <button class="btn boton-admin m-3" onclick="location.href='detalle-noticia.html?id=${noticia.id}'">
                     Leer más
                 </button>
             </div>
