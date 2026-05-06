@@ -1,10 +1,12 @@
 @import "colores";
 @import "fuentes";
 
+
 .form-control {
     border: none;
     border-bottom: 1px solid $azul-enfasis;
     background-color: transparent;
+   
 
     &:focus {
         outline: none;
@@ -20,4 +22,9 @@
     margin:auto;
     display: block;
     
+}
+
+form {
+    margin: 20px;
+    padding: 20px;
 }

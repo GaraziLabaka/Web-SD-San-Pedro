@@ -49,22 +49,26 @@
     </nav>
 
     <!-- Formulario de contacto-->
-<form class="p-4">
+<form id="form-contacto" action="https://api.web3forms.com/submit" method="POST">
   <div class="row mb-3">
     <div class="col-md-6">
+      <input type="hidden" name="access_key" value="fbe4526e-216c-4812-a1d5-994beb6c6247">
+      <input type="hidden" name="replyto" value="@"> 
+      <input type="hidden" name="from_name" value="Web S.D. San Pedro">
+      <input type="hidden" name="subject" value="Nuevo contacto desde la web del Club">
       <label for="mailContacto" class="form-label">Email</label>
-      <input type="email" class="form-control" id="mailContacto" placeholder="nombre@ejemplo.com">
+      <input type="email" class="form-control" name="mailContacto"id="mailContacto" placeholder="nombre@ejemplo.com" required>
     </div>
     <div class="col-md-6">
       <label for="asuntoContacto" class="form-label">Asunto</label>
-      <input type="text" class="form-control" id="asuntoContacto" placeholder="Asunto del mensaje">
+      <input type="text" class="form-control" name="asuntoContacto" id="asuntoContacto" placeholder="Asunto del mensaje" required>
     </div>
   </div>
 
   <div class="row mb-3">
     <div class="col-12">
       <label for="mensajeContacto" class="form-label">Mensaje</label>
-      <textarea class="form-control" id="mensajeContacto" rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
+      <textarea class="form-control" name="mensajeContacto" id="mensajeContacto" rows="4" placeholder="Escribe tu mensaje aquí" required></textarea>
     </div>
   </div>
 
@@ -74,6 +78,7 @@
     </div>
   </div>
 </form>
+<br>
 
     <!-- Pie de página -->
         <div class="contenedor-footer container-fluid">
