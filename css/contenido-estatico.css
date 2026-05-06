@@ -3,23 +3,11 @@ body {
   flex-direction: column;
 }
 
-#contenedor-noticia-individual, #contenedor-noticia-individual * {
-  font-family: "Ubuntu", sans-serif !important;
-  text-align: justify !important;
-  margin: 10px !important;
+.contenido-estatico {
+  text-align: justify;
+  padding: 20px;
+  margin: 20px;
 }
-#contenedor-noticia-individual h1 {
-  text-align: center !important;
-}
-
-.contenido-estatico, .contenido-estatico * {
-  font-family: "Ubuntu", sans-serif !important;
-  text-align: justify !important;
-  margin: 20px !important;
-}
-
-.contenido-estatico-noticias-titulo, .contenido-estatico-noticias-titulo * {
-  font-family: "Ubuntu", sans-serif !important;
-  text-align: center !important;
-  margin: 20px !important;
+.contenido-estatico h1 {
+  text-align: center;
 }/*# sourceMappingURL=contenido-estatico.css.map */

@@ -1,0 +1,23 @@
+@import "colores";
+@import "fuentes";
+
+.form-control {
+    border: none;
+    border-bottom: 1px solid $azul-enfasis;
+    background-color: transparent;
+
+    &:focus {
+        outline: none;
+        border-bottom: 1px solid $rojo-enfasis;
+        box-shadow: none;
+    }
+
+
+}
+
+.boton-admin {
+    padding: 10px 20px;
+    margin:auto;
+    display: block;
+    
+}
